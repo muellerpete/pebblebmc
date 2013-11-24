@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="org.muellerpete.pebblebmc"
+	android:versionCode="1"
+	android:versionName="1.0" >
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.BOOT_COMPLETED" />
+
+	<uses-sdk
+		android:minSdkVersion="11"
+		android:targetSdkVersion="19" />
+
+	<application
+		android:allowBackup="true"
+		android:icon="@drawable/ic_launcher"
+		android:label="@string/app_name"
+		android:theme="@style/AppTheme" >
+		<activity
+			android:name=".ui.PreferencesActivity"
+			android:label="@string/app_name" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<service
+			android:name=".pebble.PebbleService"
+			android:exported="false" >
+			<intent-filter>
+
+				<!-- <action android:name="org.muellerpete.pebblebmc.action.XBMC_PLAYER_ACTION" /> -->
+				<action android:name="com.getpebble.action.PEBBLE_CONNECTED" />
+				<action android:name="com.getpebble.action.PEBBLE_DISCONNECTED" />
+			</intent-filter>
+		</service>
+
+		<receiver
+			android:name=".translator.PebbleXBMCTranslator"
+			android:exported="false" >
+			<intent-filter>
+				<action android:name="org.muellerpete.pebblebmc.action.pebble.BUTTON_ACTION" >
+				</action>
+			</intent-filter>
+		</receiver>
+		<receiver
+			android:name=".translator.XBMCPebbleTranslator"
+			android:exported="false" >
+			<intent-filter>
+				<action android:name="org.muellerpete.pebblebmc.action.xbmc.MESSAGE" >
+				</action>
+			</intent-filter>
+		</receiver>
+
+		<service
+			android:name=".xbmc.XBMCService"
+			android:enabled="true"
+			android:exported="false"
+			android:label="pebbleBMC XBMC Service"
+			android:permission="android.permission.INTERNET" >
+			<intent-filter>
+				<action android:name="android.intent.action._BOOT_COMPLETED" />
+			</intent-filter>
+		</service>
+
+		<activity
+			android:name=".Debug"
+			android:label="@string/title_activity_debug" >
+			<intent-filter>
+				<action android:name="org.muellerpete.pebblebmc.action.DEBUG" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+	</application>
+
+</manifest>

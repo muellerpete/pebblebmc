@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/preference_debug"
+	android:title="Debug" >
+
+	<Preference android:title="Debug" >
+		<intent android:action="org.muellerpete.pebblebmc.action.DEBUG" >
+		</intent>
+	</Preference>
+
+</PreferenceScreen>

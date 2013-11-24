@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/preference_screen_top" >
+
+	<PreferenceCategory
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/preference_cat_media_centers"
+		android:title="@string/media_centers" >
+		<EditTextPreference
+			android:key="pref_xbmc_1_host"
+			android:title="Address" />
+		<EditTextPreference
+			android:defaultValue="9090"
+			android:key="pref_xbmc_1_port"
+			android:title="Port" />
+		<EditTextPreference
+			android:defaultValue="XBMC"
+			android:key="pref_xbmc_1_user"
+			android:title="User" />
+		<EditTextPreference
+			android:key="pref_xbmc_1_pass"
+			android:password="true"
+			android:title="Password" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/preference_cat_xbmc"
+		android:title="@string/xbmc_preferences" >
+	</PreferenceCategory>
+	<PreferenceCategory
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/preference_cat_pebble"
+		android:title="@string/pebble_preferences" >
+	</PreferenceCategory>
+
+</PreferenceScreen>

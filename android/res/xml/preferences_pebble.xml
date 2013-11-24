@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceFragment xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/preferences_pebble"
+	android:title="@string/pebble_preferences" >
+
+</PreferenceFragment>
