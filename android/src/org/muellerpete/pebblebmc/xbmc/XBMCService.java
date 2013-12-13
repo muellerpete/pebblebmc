@@ -24,6 +24,7 @@ public class XBMCService extends Service {
 	private final WebSocketConnection connection = new WebSocketConnection();
 	private final XBMCServiceLocalBinder binder = new XBMCServiceLocalBinder();
 	private SharedPreferences preferences;
+	private int reconnectCounter = 0;
 
 	private void connect(final String message) {
 		if (!connection.isConnected()) {
@@ -38,7 +39,11 @@ public class XBMCService extends Service {
 					@Override
 					public void onOpen() {
 						Log.d(TAG, "Status: Connected to " + wsuri);
-						connection.sendTextMessage(message);
+						reconnectCounter = 0;
+						XBMCCommand.GUIGetProperties(getApplicationContext());
+						if (message != null) {
+							connection.sendTextMessage(message);
+						}
 					}
 
 					@Override
@@ -55,7 +60,14 @@ public class XBMCService extends Service {
 
 					@Override
 					public void onClose(int code, String reason) {
-						Log.d(TAG, "Connection lost.");
+						Log.d(TAG, "Connection lost. Reason: " + reason
+								+ " Code: " + code);
+						if (code != 0) {
+							reconnectCounter++;
+							if (reconnectCounter < 3) {
+								connect(null);
+							}
+						}
 					}
 				});
 			} catch (WebSocketException e) {
@@ -90,6 +102,9 @@ public class XBMCService extends Service {
 			} else {
 				connect(intent.getStringExtra("json"));
 			}
+		} else if (action.equals("org.muellerpete.pebblebmc.xbmc.RECONNECT")) {
+			Log.d(TAG, "Reconnecting");
+			connect(null);
 		}
 		return START_STICKY;
 	}

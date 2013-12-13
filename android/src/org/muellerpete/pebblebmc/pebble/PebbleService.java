@@ -92,6 +92,14 @@ public class PebbleService extends Service {
 		messageManager.offer(startPlayerDictionary);
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(dataReceiver);
+		unregisterReceiver(ackReceiver);
+		unregisterReceiver(nackReceiver);
+	}
+
 	private static String trimString(String string, int maxLength) {
 		return string.substring(0, Math.min(string.length(), maxLength));
 	}

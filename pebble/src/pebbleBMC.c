@@ -143,7 +143,7 @@ void back_click_handler(ClickRecognizerRef recognizer, Window *window) {
     if (count == 2) {
     	window_stack_pop(TRUE);
     } else {
-    	send_button_click(BUTTON_ID_SELECT, 0, count);
+    	send_button_click(BUTTON_ID_BACK, 0, count);
     }
 }
 void back_long_click_handler(ClickRecognizerRef recognizer, Window *window) {
